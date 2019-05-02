@@ -1,0 +1,62 @@
+.split {
+    height: 100%;
+    position: absolute;
+    z-index: 1;
+    top: 0;
+    overflow-x: hidden;
+    /* padding-top: 20px; */
+  }
+  .right {
+    right: 0;
+    background-color: bisque;
+    width: 33.3%;
+  }
+  .centered {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+  }
+  
+  /* Style the image inside the centered container, if needed */
+  .centered > img {
+    width: 150px;
+    border-radius: 50%;
+  }
+  
+.social-icon {
+    display: inline-block;
+    color: white;
+    height: 44px;
+    padding: 10px 15px;
+    transition: 0.15s;
+  }
+  .social-icon:hover {
+    transform: scale(1.1);
+  }
+  
+  .nav{
+      width: 100px;
+      padding-top: 20px;
+      background-color: rgba(4, 255, 255,0.5);
+      height: 100%;
+      top: 0;
+      position: fixed;
+      margin: auto -100px;
+  }
+  .nav div{
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+  }
+  .nav-item{
+      display: block;
+      font-size: 32px;
+      margin: 12px 0;
+      text-decoration: none;
+      color: inherit;
+  }
+  .nav-item:hover{
+      opacity: .7;
+  }
