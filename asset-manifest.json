@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/static/css/main.4f035765.chunk.css",
+    "main.js": "/static/js/main.99f66146.chunk.js",
+    "main.js.map": "/static/js/main.99f66146.chunk.js.map",
+    "runtime~main.js": "/static/js/runtime~main.a8a9905a.js",
+    "runtime~main.js.map": "/static/js/runtime~main.a8a9905a.js.map",
+    "static/js/2.540a5a4a.chunk.js": "/static/js/2.540a5a4a.chunk.js",
+    "static/js/2.540a5a4a.chunk.js.map": "/static/js/2.540a5a4a.chunk.js.map",
+    "index.html": "/index.html",
+    "precache-manifest.7c83ddab4f2df13701a65ae7d9af8aba.js": "/precache-manifest.7c83ddab4f2df13701a65ae7d9af8aba.js",
+    "service-worker.js": "/service-worker.js",
+    "static/css/main.4f035765.chunk.css.map": "/static/css/main.4f035765.chunk.css.map",
+    "static/media/codepen.svg": "/static/media/codepen.b89e0fcd.svg",
+    "static/media/github.svg": "/static/media/github.fa5f6667.svg",
+    "static/media/linkedin.svg": "/static/media/linkedin.4094be6a.svg",
+    "static/media/profile_img_square.jpg": "/static/media/profile_img_square.b6cf7b0a.jpg"
+  }
+}
