@@ -1,0 +1,107 @@
+:root {
+  --bg-color: white;
+  --typewriteSpeed: 4s;
+  --typewriteSteps: 17;
+  --typewriterDelay: 500ms;
+}
+.App {
+  font-family: "Roboto Mono", monospace;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+}
+hr {
+  width: 100%;
+}
+.main-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 900px;
+  margin: 1rem;
+}
+.bottom-spacer {
+  height: 50px;
+}
+.profilePicture {
+  opacity: 0;
+  transform: translateY(3rem);
+  animation: fadeInUp 2s ease forwards;
+  border-radius: 50%;
+}
+.name {
+  color: #f56363;
+  font-weight: 700;
+  width: max-content;
+  position: relative;
+}
+.name::before,
+.name::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+}
+.name::before {
+  background: var(--bg-color);
+  animation: typewriter var(--typewriteSpeed) steps(var(--typewriteSteps))
+    var(--typewriterDelay) forwards;
+}
+.name::after {
+  width: 0.125em;
+  background-color: black;
+  animation: typewriter var(--typewriteSpeed) steps(var(--typewriteSteps))
+      var(--typewriterDelay) forwards,
+    blink 750ms steps(17) infinite;
+}
+@keyframes typewriter {
+  to {
+    left: 100%;
+  }
+}
+@keyframes blink {
+  to {
+    background: transparent;
+  }
+}
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.about-section {
+  text-align: left;
+  max-width: 65ch;
+}
+
+nav {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  flex-basis: 100%;
+  /* flex-wrap: wrap; */
+}
+.nav-link {
+  background-color: rgb(193, 241, 233);
+  border: none;
+  margin: 0.2rem;
+  padding: 0.4rem;
+  border-radius: 6px;
+  text-decoration: none;
+  display: block;
+}
+
+.section {
+  position: relative;
+  width: 100%;
+}
+.light-ruler {
+  color: hsl(0, 0%, 87%);
+  width: 35%;
+}

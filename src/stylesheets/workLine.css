@@ -1,0 +1,26 @@
+.work-line {
+  display: flex;
+  /* background: pink; */
+  width: 100%;
+  padding: 1rem 0;
+  position: relative;
+}
+
+.work-line .company-name {
+  margin-right: auto;
+}
+.work-line .work-details {
+  text-align: left;
+}
+
+@media only screen and (max-width: 500px) {
+  .work-line {
+    flex-direction: column;
+    align-items: center;
+  }
+  .work-line .company-name {
+    margin-right: unset;
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+}
