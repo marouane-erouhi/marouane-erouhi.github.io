@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,13 +7,8 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;600;700&display=swap');
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
+        /* All styles are scoped to .photo-tint-app to ensure portability */
+        .photo-tint-app {
             font-family: 'Space Grotesk', sans-serif;
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             min-height: 100vh;
@@ -22,202 +16,175 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
+            color: #fff;
+            box-sizing: border-box;
         }
 
-        .container {
+        .photo-tint-app * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .photo-tint-app .container {
             background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(20px);
             border-radius: 30px;
             border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 40px;
-            max-width: 900px;
+            max-width: 800px;
             width: 100%;
             box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
         }
 
-        h1 {
-            color: #fff;
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
-            font-weight: 700;
-            letter-spacing: -1px;
-        }
-
-        .subtitle {
-            color: rgba(255, 255, 255, 0.6);
-            text-align: center;
+        /* Stepper Styles */
+        .photo-tint-app .stepper {
+            display: flex;
+            justify-content: space-between;
             margin-bottom: 30px;
-            font-weight: 300;
+            position: relative;
         }
 
-        .upload-area {
+        .photo-tint-app .stepper::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: rgba(255, 255, 255, 0.2);
+            z-index: 1;
+        }
+
+        .photo-tint-app .step {
+            position: relative;
+            z-index: 2;
+            background: #1a1a2e;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .photo-tint-app .step.active {
+            background: #e94560;
+            border-color: #e94560;
+            box-shadow: 0 0 15px rgba(233, 69, 96, 0.5);
+        }
+
+        .photo-tint-app .step-label {
+            position: absolute;
+            top: 50px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            color: rgba(255, 255, 255, 0.6);
+        }
+        
+        .photo-tint-app .step.active .step-label {
+            color: #fff;
+        }
+
+        /* Upload Area */
+        .photo-tint-app .upload-area {
             border: 2px dashed rgba(255, 255, 255, 0.3);
             border-radius: 20px;
             padding: 60px 40px;
             text-align: center;
             cursor: pointer;
             transition: all 0.3s ease;
-            margin-bottom: 30px;
         }
 
-        .upload-area:hover {
+        .photo-tint-app .upload-area:hover, .photo-tint-app .upload-area.dragover {
             border-color: #e94560;
             background: rgba(233, 69, 96, 0.1);
         }
 
-        .upload-area.dragover {
-            border-color: #e94560;
-            background: rgba(233, 69, 96, 0.2);
-            transform: scale(1.02);
-        }
+        .photo-tint-app .upload-icon { font-size: 3rem; margin-bottom: 15px; color: #e94560; }
+        .photo-tint-app .upload-text { font-size: 1.1rem; color: rgba(255, 255, 255, 0.8); }
+        .photo-tint-app #fileInput { display: none; }
 
-        .upload-icon {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            color: #e94560;
-        }
-
-        .upload-text {
-            color: rgba(255, 255, 255, 0.8);
-            font-size: 1.1rem;
-        }
-
-        .upload-hint {
-            color: rgba(255, 255, 255, 0.4);
-            font-size: 0.9rem;
-            margin-top: 10px;
-        }
-
-        #fileInput {
+        /* Crop & Tint Areas */
+        .photo-tint-app .workspace {
             display: none;
-        }
-
-        .canvas-container {
-            display: none;
-            margin-bottom: 30px;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
-        }
-
-        canvas {
-            display: block;
-            width: 100%;
-            max-height: 500px;
-            object-fit: contain;
-        }
-
-        .controls {
-            display: none;
-            background: rgba(0, 0, 0, 0.3);
-            border-radius: 20px;
-            padding: 30px;
-        }
-
-        .control-group {
-            margin-bottom: 25px;
-        }
-
-        .control-group:last-child {
-            margin-bottom: 0;
-        }
-
-        .control-label {
-            color: #fff;
-            font-weight: 600;
-            margin-bottom: 15px;
-            display: block;
-            font-size: 0.95rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .color-picker-wrapper {
-            display: flex;
+            flex-direction: column;
             align-items: center;
             gap: 20px;
         }
 
-        input[type="color"] {
-            width: 80px;
-            height: 50px;
-            border: none;
-            border-radius: 12px;
-            cursor: pointer;
-            background: transparent;
-        }
-
-        .color-value {
-            color: rgba(255, 255, 255, 0.8);
-            font-family: monospace;
-            font-size: 1rem;
-        }
-
-        .slider-container {
+        .photo-tint-app .workspace.active {
             display: flex;
-            align-items: center;
+        }
+
+        /* Enforce Square Canvas */
+        .photo-tint-app .canvas-container {
+            width: 100%;
+            max-width: 400px;
+            aspect-ratio: 1 / 1;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+            background: #000;
+            position: relative;
+            cursor: grab;
+            touch-action: none; /* Prevents mobile scrolling while cropping */
+        }
+        
+        .photo-tint-app .canvas-container:active {
+            cursor: grabbing;
+        }
+
+        .photo-tint-app canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Controls */
+        .photo-tint-app .controls {
+            width: 100%;
+            display: flex;
+            justify-content: center;
             gap: 15px;
         }
 
-        input[type="range"] {
-            flex: 1;
-            height: 8px;
-            -webkit-appearance: none;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            outline: none;
-        }
-
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 24px;
-            height: 24px;
-            background: #e94560;
-            border-radius: 50%;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(233, 69, 96, 0.4);
-            transition: transform 0.2s;
-        }
-
-        input[type="range"]::-webkit-slider-thumb:hover {
-            transform: scale(1.2);
-        }
-
-        .slider-value {
-            color: #e94560;
-            font-weight: 600;
-            min-width: 50px;
-            text-align: right;
-        }
-
-        .reset-btn {
-            background: transparent;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            color: #fff;
-            padding: 12px 30px;
+        .photo-tint-app .color-picker-btn {
+            position: relative;
+            overflow: hidden;
             border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #2a2a4a;
+            padding: 10px 20px;
             cursor: pointer;
-            font-family: 'Space Grotesk', sans-serif;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            margin-top: 20px;
-            width: 100%;
+            border: 2px solid rgba(255,255,255,0.1);
+            transition: all 0.3s;
         }
 
-        .reset-btn:hover {
-            background: #e94560;
+        .photo-tint-app .color-picker-btn:hover {
             border-color: #e94560;
         }
 
-        .action-buttons {
-            display: none;
-            gap: 15px;
-            margin-top: 20px;
+        .photo-tint-app .color-picker-btn input[type="color"] {
+            position: absolute;
+            opacity: 0;
+            width: 200%;
+            height: 200%;
+            cursor: pointer;
         }
 
-        .btn {
-            flex: 1;
+        .photo-tint-app .color-picker-btn span {
+            font-weight: 600;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .photo-tint-app .btn {
             padding: 15px 30px;
             border: none;
             border-radius: 30px;
@@ -228,281 +195,398 @@
             transition: all 0.3s ease;
         }
 
-        .btn-primary {
-            background: #e94560;
-            color: #fff;
-        }
-
-        .btn-primary:hover {
-            background: #ff6b6b;
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(233, 69, 96, 0.4);
-        }
-
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
-        }
-
-        .btn-secondary:hover {
-            background: rgba(255, 255, 255, 0.2);
-        }
+        .photo-tint-app .btn-primary { background: #e94560; color: #fff; }
+        .photo-tint-app .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(233, 69, 96, 0.4); }
+        .photo-tint-app .btn-secondary { background: rgba(255, 255, 255, 0.1); color: #fff; }
+        .photo-tint-app .btn-secondary:hover { background: rgba(255, 255, 255, 0.2); }
     </style>
 </head>
 <body>
+
+<div class="photo-tint-app" id="appRoot">
     <div class="container">
-        <h1>Photo Tint Studio</h1>
-        <p class="subtitle">Upload a headshot and apply beautiful color tints</p>
-
-        <div class="upload-area" id="uploadArea">
-            <div class="upload-icon">📷</div>
-            <div class="upload-text">Drop your image here or click to browse</div>
-            <div class="upload-hint">Supports JPG, PNG, WEBP</div>
+        <div class="stepper">
+            <div class="step active" id="step1">1<span class="step-label">Upload</span></div>
+            <div class="step" id="step2">2<span class="step-label">Crop</span></div>
+            <div class="step" id="step3">3<span class="step-label">Tint</span></div>
         </div>
 
-        <input type="file" id="fileInput" accept="image/*">
-
-        <div class="canvas-container" id="canvasContainer">
-            <canvas id="canvas"></canvas>
+        <div class="workspace active" id="stageUpload">
+            <div class="upload-area" id="uploadArea">
+                <div class="upload-icon">📷</div>
+                <div class="upload-text">Drop your image here or click to browse</div>
+            </div>
+            <input type="file" id="fileInput" accept="image/*">
         </div>
 
-        <div class="controls" id="controls">
-            <div class="control-group">
-                <label class="control-label">Tint Color</label>
-                <div class="color-picker-wrapper">
+        <div class="workspace" id="stageCrop">
+            <div class="canvas-container" id="cropContainer">
+                <canvas id="cropCanvas" width="800" height="800"></canvas>
+            </div>
+            <div class="controls">
+                <button class="btn btn-secondary" id="cancelCropBtn">Cancel</button>
+                <button class="btn btn-primary" id="confirmCropBtn">Confirm Crop</button>
+            </div>
+        </div>
+
+        <div class="workspace" id="stageTint">
+            <div class="canvas-container">
+                <canvas id="tintCanvas" width="800" height="800"></canvas>
+            </div>
+            <div class="controls">
+                <div class="color-picker-btn">
+                    <span>Select Tint Color</span>
                     <input type="color" id="colorPicker" value="#e94560">
-                    <span class="color-value" id="colorValue">#e94560</span>
                 </div>
+                <button class="btn btn-primary" id="downloadBtn">Download Square</button>
+                <button class="btn btn-secondary" id="newImgBtn">Start Over</button>
             </div>
-
-            <div class="control-group">
-                <label class="control-label">Tint Intensity</label>
-                <div class="slider-container">
-                    <input type="range" id="intensitySlider" min="0" max="100" value="50">
-                    <span class="slider-value" id="intensityValue">50%</span>
-                </div>
-            </div>
-
-            <div class="control-group">
-                <label class="control-label">Brightness</label>
-                <div class="slider-container">
-                    <input type="range" id="brightnessSlider" min="0" max="200" value="100">
-                    <span class="slider-value" id="brightnessValue">100%</span>
-                </div>
-            </div>
-
-            <div class="control-group">
-                <label class="control-label">Contrast</label>
-                <div class="slider-container">
-                    <input type="range" id="contrastSlider" min="0" max="200" value="100">
-                    <span class="slider-value" id="contrastValue">100%</span>
-                </div>
-            </div>
-
-            <button class="reset-btn" id="resetBtn">Reset All Settings</button>
-        </div>
-
-        <div class="action-buttons" id="actionButtons">
-            <button class="btn btn-secondary" id="newImageBtn">New Image</button>
-            <button class="btn btn-primary" id="downloadBtn">Download</button>
         </div>
     </div>
+</div>
 
-    <script>
-        const uploadArea = document.getElementById('uploadArea');
-        const fileInput = document.getElementById('fileInput');
-        const canvasContainer = document.getElementById('canvasContainer');
-        const canvas = document.getElementById('canvas');
-        const ctx = canvas.getContext('2d');
-        const controls = document.getElementById('controls');
-        const actionButtons = document.getElementById('actionButtons');
+<script>
+/**
+ * Structured as a class. 
+ * For Angular: The properties below would be class variables, 
+ * and the event listeners would be bound in your HTML template using (click), (wheel), etc.
+ */
+class PhotoTintApp {
+    constructor() {
+        this.bindElements();
+        this.bindEvents();
+        
+        // App State
+        this.originalImage = null;
+        this.croppedImage = null;
+        this.tintColor = { r: 233, g: 69, b: 96 };
+        
+        // Crop State
+        this.cropScale = 1;
+        this.cropX = 0;
+        this.cropY = 0;
+        this.isDragging = false;
+        this.lastX = 0;
+        this.lastY = 0;
+        this.initialPinchDist = null;
+    }
 
-        const colorPicker = document.getElementById('colorPicker');
-        const colorValue = document.getElementById('colorValue');
-        const intensitySlider = document.getElementById('intensitySlider');
-        const intensityValue = document.getElementById('intensityValue');
-        const brightnessSlider = document.getElementById('brightnessSlider');
-        const brightnessValue = document.getElementById('brightnessValue');
-        const contrastSlider = document.getElementById('contrastSlider');
-        const contrastValue = document.getElementById('contrastValue');
-        const resetBtn = document.getElementById('resetBtn');
-        const newImageBtn = document.getElementById('newImageBtn');
-        const downloadBtn = document.getElementById('downloadBtn');
+    bindElements() {
+        this.step1 = document.getElementById('step1');
+        this.step2 = document.getElementById('step2');
+        this.step3 = document.getElementById('step3');
+        
+        this.stageUpload = document.getElementById('stageUpload');
+        this.stageCrop = document.getElementById('stageCrop');
+        this.stageTint = document.getElementById('stageTint');
+        
+        this.uploadArea = document.getElementById('uploadArea');
+        this.fileInput = document.getElementById('fileInput');
+        
+        this.cropContainer = document.getElementById('cropContainer');
+        this.cropCanvas = document.getElementById('cropCanvas');
+        this.cropCtx = this.cropCanvas.getContext('2d', { alpha: false });
+        
+        this.tintCanvas = document.getElementById('tintCanvas');
+        this.tintCtx = this.tintCanvas.getContext('2d', { alpha: false });
+        
+        this.colorPicker = document.getElementById('colorPicker');
+        this.confirmCropBtn = document.getElementById('confirmCropBtn');
+        this.cancelCropBtn = document.getElementById('cancelCropBtn');
+        this.downloadBtn = document.getElementById('downloadBtn');
+        this.newImgBtn = document.getElementById('newImgBtn');
+    }
 
-        let originalImage = null;
-        let originalImageData = null;
-
-        // Upload handling
-        uploadArea.addEventListener('click', () => fileInput.click());
-
-        uploadArea.addEventListener('dragover', (e) => {
+    bindEvents() {
+        // Upload Events
+        this.uploadArea.addEventListener('click', () => this.fileInput.click());
+        this.uploadArea.addEventListener('dragover', (e) => { e.preventDefault(); this.uploadArea.classList.add('dragover'); });
+        this.uploadArea.addEventListener('dragleave', () => this.uploadArea.classList.remove('dragover'));
+        this.uploadArea.addEventListener('drop', (e) => {
             e.preventDefault();
-            uploadArea.classList.add('dragover');
+            this.uploadArea.classList.remove('dragover');
+            if (e.dataTransfer.files[0]) this.handleFile(e.dataTransfer.files[0]);
+        });
+        this.fileInput.addEventListener('change', (e) => {
+            if (e.target.files[0]) this.handleFile(e.target.files[0]);
         });
 
-        uploadArea.addEventListener('dragleave', () => {
-            uploadArea.classList.remove('dragover');
+        // Crop Controls (Mouse)
+        this.cropContainer.addEventListener('mousedown', this.onDragStart.bind(this));
+        window.addEventListener('mousemove', this.onDragMove.bind(this));
+        window.addEventListener('mouseup', this.onDragEnd.bind(this));
+        this.cropContainer.addEventListener('wheel', this.onWheel.bind(this), { passive: false });
+
+        // Crop Controls (Touch/Mobile)
+        this.cropContainer.addEventListener('touchstart', this.onTouchStart.bind(this), { passive: false });
+        window.addEventListener('touchmove', this.onTouchMove.bind(this), { passive: false });
+        window.addEventListener('touchend', this.onTouchEnd.bind(this));
+
+        // Buttons & Inputs
+        this.confirmCropBtn.addEventListener('click', () => this.executeCrop());
+        this.cancelCropBtn.addEventListener('click', () => this.setStage(1));
+        this.colorPicker.addEventListener('input', (e) => {
+            this.tintColor = this.hexToRgb(e.target.value);
+            this.applyTint();
         });
+        this.downloadBtn.addEventListener('click', () => this.downloadFinal());
+        this.newImgBtn.addEventListener('click', () => this.setStage(1));
+    }
 
-        uploadArea.addEventListener('drop', (e) => {
-            e.preventDefault();
-            uploadArea.classList.remove('dragover');
-            const file = e.dataTransfer.files[0];
-            if (file && file.type.startsWith('image/')) {
-                handleImage(file);
-            }
-        });
+    setStage(stageNum) {
+        this.stageUpload.classList.remove('active');
+        this.stageCrop.classList.remove('active');
+        this.stageTint.classList.remove('active');
+        this.step1.classList.remove('active');
+        this.step2.classList.remove('active');
+        this.step3.classList.remove('active');
 
-        fileInput.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (file) {
-                handleImage(file);
-            }
-        });
+        if (stageNum === 1) {
+            this.stageUpload.classList.add('active');
+            this.step1.classList.add('active');
+            this.fileInput.value = '';
+        } else if (stageNum === 2) {
+            this.stageCrop.classList.add('active');
+            this.step1.classList.add('active');
+            this.step2.classList.add('active');
+            this.initCropState();
+        } else if (stageNum === 3) {
+            this.stageTint.classList.add('active');
+            this.step1.classList.add('active');
+            this.step2.classList.add('active');
+            this.step3.classList.add('active');
+            this.applyTint();
+        }
+    }
 
-        function handleImage(file) {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                const img = new Image();
-                img.onload = () => {
-                    originalImage = img;
-
-                    // Set canvas size
-                    const maxWidth = 800;
-                    const scale = Math.min(1, maxWidth / img.width);
-                    canvas.width = img.width * scale;
-                    canvas.height = img.height * scale;
-
-                    // Draw original image
-                    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                    originalImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-
-                    // Convert to grayscale
-                    convertToGrayscale();
-
-                    // Show canvas and controls
-                    uploadArea.style.display = 'none';
-                    canvasContainer.style.display = 'block';
-                    controls.style.display = 'block';
-                    actionButtons.style.display = 'flex';
-
-                    // Apply initial tint
-                    applyTint();
-                };
-                img.src = e.target.result;
+    handleFile(file) {
+        if (!file.type.startsWith('image/')) return;
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            const img = new Image();
+            img.onload = () => {
+                this.originalImage = img;
+                this.setStage(2);
             };
-            reader.readAsDataURL(file);
-        }
+            img.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
 
-        function convertToGrayscale() {
-            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-            const data = imageData.data;
+    // --- CROP LOGIC ---
 
-            for (let i = 0; i < data.length; i += 4) {
-                const gray = data[i] * 0.299 + data[i + 1] * 0.587 + data[i + 2] * 0.114;
-                data[i] = gray;
-                data[i + 1] = gray;
-                data[i + 2] = gray;
-            }
+    initCropState() {
+        // Ensure the shortest side of the image fits the square canvas
+        const minScale = Math.max(
+            this.cropCanvas.width / this.originalImage.width,
+            this.cropCanvas.height / this.originalImage.height
+        );
+        this.cropScale = minScale;
+        
+        // Center the image initially
+        this.cropX = (this.cropCanvas.width - (this.originalImage.width * this.cropScale)) / 2;
+        this.cropY = (this.cropCanvas.height - (this.originalImage.height * this.cropScale)) / 2;
+        
+        this.drawCrop();
+    }
 
-            ctx.putImageData(imageData, 0, 0);
-            originalImageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
-        }
+    drawCrop() {
+        this.cropCtx.fillStyle = '#000';
+        this.cropCtx.fillRect(0, 0, this.cropCanvas.width, this.cropCanvas.height);
+        this.cropCtx.drawImage(
+            this.originalImage, 
+            this.cropX, this.cropY, 
+            this.originalImage.width * this.cropScale, 
+            this.originalImage.height * this.cropScale
+        );
+    }
 
-        function applyTint() {
-            if (!originalImageData) return;
+    clampCropPosition() {
+        // Prevent image from being dragged inside the canvas bounds (must cover the square)
+        const minX = this.cropCanvas.width - (this.originalImage.width * this.cropScale);
+        const minY = this.cropCanvas.height - (this.originalImage.height * this.cropScale);
+        
+        this.cropX = Math.min(0, Math.max(this.cropX, minX));
+        this.cropY = Math.min(0, Math.max(this.cropY, minY));
+    }
 
-            const tintColor = hexToRgb(colorPicker.value);
-            const intensity = intensitySlider.value / 100;
-            const brightness = brightnessSlider.value / 100;
-            const contrast = contrastSlider.value / 100;
+    handleZoom(zoomFactor, centerX, centerY) {
+        const oldScale = this.cropScale;
+        const minScale = Math.max(
+            this.cropCanvas.width / this.originalImage.width,
+            this.cropCanvas.height / this.originalImage.height
+        );
+        
+        this.cropScale *= zoomFactor;
+        this.cropScale = Math.max(minScale, this.cropScale); // don't zoom out past boundaries
 
-            const imageData = new ImageData(
-                new Uint8ClampedArray(originalImageData.data),
-                originalImageData.width,
-                originalImageData.height
+        // Adjust position so we zoom in on the center of the interaction
+        const scaleChange = this.cropScale / oldScale;
+        this.cropX = centerX - (centerX - this.cropX) * scaleChange;
+        this.cropY = centerY - (centerY - this.cropY) * scaleChange;
+
+        this.clampCropPosition();
+        this.drawCrop();
+    }
+
+    onWheel(e) {
+        e.preventDefault();
+        const zoomFactor = e.deltaY < 0 ? 1.05 : 0.95;
+        // Calculate center of canvas for simple zoom
+        const rect = this.cropCanvas.getBoundingClientRect();
+        const centerX = (e.clientX - rect.left) * (this.cropCanvas.width / rect.width);
+        const centerY = (e.clientY - rect.top) * (this.cropCanvas.height / rect.height);
+        this.handleZoom(zoomFactor, centerX, centerY);
+    }
+
+    onDragStart(e) {
+        this.isDragging = true;
+        this.lastX = e.clientX;
+        this.lastY = e.clientY;
+    }
+
+    onDragMove(e) {
+        if (!this.isDragging) return;
+        const dx = e.clientX - this.lastX;
+        const dy = e.clientY - this.lastY;
+        this.lastX = e.clientX;
+        this.lastY = e.clientY;
+        
+        // Scale drag speed relative to canvas display size vs internal resolution
+        const rect = this.cropCanvas.getBoundingClientRect();
+        this.cropX += dx * (this.cropCanvas.width / rect.width);
+        this.cropY += dy * (this.cropCanvas.height / rect.height);
+        
+        this.clampCropPosition();
+        this.drawCrop();
+    }
+
+    onDragEnd() { this.isDragging = false; }
+
+    onTouchStart(e) {
+        e.preventDefault(); // Stop scrolling
+        if (e.touches.length === 1) {
+            this.isDragging = true;
+            this.lastX = e.touches[0].clientX;
+            this.lastY = e.touches[0].clientY;
+        } else if (e.touches.length === 2) {
+            this.initialPinchDist = Math.hypot(
+                e.touches[0].clientX - e.touches[1].clientX,
+                e.touches[0].clientY - e.touches[1].clientY
             );
-            const data = imageData.data;
+        }
+    }
 
-            for (let i = 0; i < data.length; i += 4) {
-                let gray = data[i];
+    onTouchMove(e) {
+        e.preventDefault();
+        if (e.touches.length === 1 && this.isDragging) {
+            const dx = e.touches[0].clientX - this.lastX;
+            const dy = e.touches[0].clientY - this.lastY;
+            this.lastX = e.touches[0].clientX;
+            this.lastY = e.touches[0].clientY;
+            
+            const rect = this.cropCanvas.getBoundingClientRect();
+            this.cropX += dx * (this.cropCanvas.width / rect.width);
+            this.cropY += dy * (this.cropCanvas.height / rect.height);
+            
+            this.clampCropPosition();
+            this.drawCrop();
+        } else if (e.touches.length === 2 && this.initialPinchDist) {
+            const currentDist = Math.hypot(
+                e.touches[0].clientX - e.touches[1].clientX,
+                e.touches[0].clientY - e.touches[1].clientY
+            );
+            const zoomFactor = currentDist / this.initialPinchDist;
+            this.initialPinchDist = currentDist; // update for continuous zooming
+            
+            this.handleZoom(zoomFactor, this.cropCanvas.width/2, this.cropCanvas.height/2);
+        }
+    }
 
-                // Apply contrast
-                gray = ((gray - 128) * contrast) + 128;
+    onTouchEnd(e) {
+        if (e.touches.length < 2) this.initialPinchDist = null;
+        if (e.touches.length === 0) this.isDragging = false;
+    }
 
-                // Apply brightness
-                gray = gray * brightness;
+    executeCrop() {
+        // Output image should be at highest possible resolution.
+        // We determine the highest resolution the selected square area supports natively.
+        const scaleInv = 1 / this.cropScale;
+        const cropSizeUnscaled = this.cropCanvas.width * scaleInv;
+        
+        // Ensure we don't exceed actual image size to prevent blurry upscaling on export
+        const finalSize = Math.floor(Math.min(cropSizeUnscaled, this.originalImage.width, this.originalImage.height));
+        
+        // Offscreen canvas for high-res extraction
+        const offscreen = document.createElement('canvas');
+        offscreen.width = finalSize;
+        offscreen.height = finalSize;
+        const oCtx = offscreen.getContext('2d');
+        
+        // Draw the exact area selected
+        oCtx.drawImage(
+            this.originalImage,
+            Math.abs(this.cropX * scaleInv), Math.abs(this.cropY * scaleInv), // source x, y
+            cropSizeUnscaled, cropSizeUnscaled,                               // source width, height
+            0, 0, finalSize, finalSize                                        // dest x, y, width, height
+        );
+        
+        // Save the high res cropped image to memory
+        this.croppedImage = new Image();
+        this.croppedImage.onload = () => this.setStage(3);
+        this.croppedImage.src = offscreen.toDataURL('image/png');
+    }
 
-                // Clamp values
-                gray = Math.max(0, Math.min(255, gray));
+    // --- TINT LOGIC ---
 
-                // Apply tint
-                data[i] = gray * (1 - intensity) + tintColor.r * intensity;
-                data[i + 1] = gray * (1 - intensity) + tintColor.g * intensity;
-                data[i + 2] = gray * (1 - intensity) + tintColor.b * intensity;
-            }
+    applyTint() {
+        if (!this.croppedImage) return;
+        
+        // Match working canvas to the high-res crop size
+        this.tintCanvas.width = this.croppedImage.width;
+        this.tintCanvas.height = this.croppedImage.height;
+        
+        this.tintCtx.drawImage(this.croppedImage, 0, 0);
+        const imageData = this.tintCtx.getImageData(0, 0, this.tintCanvas.width, this.tintCanvas.height);
+        const data = imageData.data;
 
-            ctx.putImageData(imageData, 0, 0);
+        // Apply Grayscale + Tint (Multiply Blend)
+        for (let i = 0; i < data.length; i += 4) {
+            // Luminance formula
+            const gray = data[i] * 0.299 + data[i + 1] * 0.587 + data[i + 2] * 0.114;
+            
+            // Fixed 50% intensity blend for simplicity since slider is removed
+            const intensity = 0.5; 
+            
+            data[i] = gray * (1 - intensity) + (gray * (this.tintColor.r / 255)) * intensity;
+            data[i + 1] = gray * (1 - intensity) + (gray * (this.tintColor.g / 255)) * intensity;
+            data[i + 2] = gray * (1 - intensity) + (gray * (this.tintColor.b / 255)) * intensity;
         }
 
-        function hexToRgb(hex) {
-            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-            return result ? {
-                r: parseInt(result[1], 16),
-                g: parseInt(result[2], 16),
-                b: parseInt(result[3], 16)
-            } : { r: 233, g: 69, b: 96 };
-        }
+        this.tintCtx.putImageData(imageData, 0, 0);
+    }
 
-        // Event listeners for controls
-        colorPicker.addEventListener('input', (e) => {
-            colorValue.textContent = e.target.value;
-            applyTint();
-        });
+    hexToRgb(hex) {
+        const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16)
+        } : { r: 233, g: 69, b: 96 };
+    }
 
-        intensitySlider.addEventListener('input', (e) => {
-            intensityValue.textContent = e.target.value + '%';
-            applyTint();
-        });
+    downloadFinal() {
+        const link = document.createElement('a');
+        link.download = 'tinted-square.png';
+        link.href = this.tintCanvas.toDataURL('image/png', 1.0);
+        link.click();
+    }
+}
 
-        brightnessSlider.addEventListener('input', (e) => {
-            brightnessValue.textContent = e.target.value + '%';
-            applyTint();
-        });
-
-        contrastSlider.addEventListener('input', (e) => {
-            contrastValue.textContent = e.target.value + '%';
-            applyTint();
-        });
-
-        resetBtn.addEventListener('click', () => {
-            colorPicker.value = '#e94560';
-            colorValue.textContent = '#e94560';
-            intensitySlider.value = 50;
-            intensityValue.textContent = '50%';
-            brightnessSlider.value = 100;
-            brightnessValue.textContent = '100%';
-            contrastSlider.value = 100;
-            contrastValue.textContent = '100%';
-            applyTint();
-        });
-
-        newImageBtn.addEventListener('click', () => {
-            uploadArea.style.display = 'block';
-            canvasContainer.style.display = 'none';
-            controls.style.display = 'none';
-            actionButtons.style.display = 'none';
-            fileInput.value = '';
-            originalImage = null;
-            originalImageData = null;
-        });
-
-        downloadBtn.addEventListener('click', () => {
-            const link = document.createElement('a');
-            link.download = 'tinted-photo.png';
-            link.href = canvas.toDataURL('image/png');
-            link.click();
-        });
-    </script>
+// Initialize the App
+document.addEventListener('DOMContentLoaded', () => {
+    new PhotoTintApp();
+});
+</script>
 </body>
 </html>
