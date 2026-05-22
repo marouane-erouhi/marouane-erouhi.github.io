@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html class="scroll-smooth" lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>GleamToronto | Professional Window Cleaning</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&amp;family=Inter:wght@400;500;600&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet">
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#53e16f",
+                        "tertiary-container": "#008733",
+                        "on-tertiary-fixed": "#002107",
+                        "background": "#f8f9fa",
+                        "tertiary-fixed": "#72fe88",
+                        "error-container": "#ffdad6",
+                        "on-secondary-fixed-variant": "#3e4850",
+                        "on-primary-fixed-variant": "#004493",
+                        "primary-container": "#0070eb",
+                        "outline-variant": "#c1c6d7",
+                        "inverse-on-surface": "#f0f1f2",
+                        "surface-variant": "#e1e3e4",
+                        "on-error-container": "#93000a",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-low": "#f3f4f5",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#5c666e",
+                        "secondary": "#566068",
+                        "on-background": "#191c1d",
+                        "on-primary-fixed": "#001a41",
+                        "on-error": "#ffffff",
+                        "surface-container": "#edeeef",
+                        "inverse-primary": "#adc6ff",
+                        "primary": "#0058bc",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#e1e3e4",
+                        "surface-dim": "#d9dadb",
+                        "surface-bright": "#f8f9fa",
+                        "on-primary": "#ffffff",
+                        "primary-fixed": "#d8e2ff",
+                        "tertiary": "#006b27",
+                        "secondary-fixed-dim": "#bec8d1",
+                        "secondary-container": "#dae4ee",
+                        "on-primary-container": "#fefcff",
+                        "on-secondary-fixed": "#131d24",
+                        "outline": "#717786",
+                        "on-tertiary-fixed-variant": "#00531c",
+                        "surface-container-high": "#e7e8e9",
+                        "on-surface-variant": "#414755",
+                        "on-secondary": "#ffffff",
+                        "primary-fixed-dim": "#adc6ff",
+                        "on-surface": "#191c1d",
+                        "inverse-surface": "#2e3132",
+                        "on-tertiary-container": "#f7fff2",
+                        "secondary-fixed": "#dae4ee",
+                        "surface": "#f8f9fa"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "unit": "8px",
+                        "margin-desktop": "64px",
+                        "max-width": "1280px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "headline-md": ["Montserrat"],
+                        "headline-xl": ["Montserrat"],
+                        "body-md": ["Inter"],
+                        "headline-xl-mobile": ["Montserrat"],
+                        "headline-lg": ["Montserrat"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "20px", "fontWeight": "400" }],
+                        "headline-md": ["24px", { "lineHeight": "32px", "fontWeight": "600" }],
+                        "headline-xl": ["48px", { "lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+                        "headline-xl-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "headline-lg": ["32px", { "lineHeight": "40px", "fontWeight": "600" }],
+                        "label-sm": ["12px", { "lineHeight": "14px", "fontWeight": "500" }],
+                        "label-md": ["14px", { "lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }]
+                    }
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .slider-handle {
+            cursor: ew-resize;
+            touch-action: none;
+        }
+    </style>
+</head>
+
+<body class="bg-background text-on-background font-body-md">
+    <!-- TopNavBar -->
+    <header class="docked full-width top-0 sticky z-50 bg-surface/80 backdrop-blur-md shadow-sm">
+        <nav
+            class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop py-4 max-w-max-width mx-auto">
+            <div class="font-headline-md text-headline-md font-bold text-primary tracking-tight">GleamToronto</div>
+            <div class="hidden md:flex items-center gap-8">
+                <a class="text-secondary hover:text-primary transition-colors font-label-md text-label-md"
+                    href="#services">Services</a>
+                <a class="text-secondary hover:text-primary transition-colors font-label-md text-label-md"
+                    href="#why-us">Why Us</a>
+                <a class="text-secondary hover:text-primary transition-colors font-label-md text-label-md"
+                    href="#gallery">Gallery</a>
+                <a class="text-secondary hover:text-primary transition-colors font-label-md text-label-md"
+                    href="#area">Service Area</a>
+                <a class="text-secondary hover:text-primary transition-colors font-label-md text-label-md"
+                    href="#reviews">Reviews</a>
+            </div>
+            <button
+                class="bg-primary text-on-primary px-6 py-2.5 rounded-full font-label-md text-label-md hover:scale-105 transition-transform active:scale-95 duration-150">
+                Book Now
+            </button>
+        </nav>
+    </header>
+    <main>
+        <!-- Hero Section -->
+        <section class="relative h-[90vh] flex items-center overflow-hidden">
+            <div class="absolute inset-0 z-0">
+                <img alt="Crystal clear windows looking out to Toronto skyline"
+                    class="w-full h-full object-cover brightness-90"
+                    src="looking-at-toronto-skyline-2.png">
+                <div class="absolute inset-0 bg-gradient-to-r from-background/40 to-transparent"></div>
+            </div>
+            <div class="relative z-10 w-full max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
+                <div class="max-w-2xl glass-card p-10 rounded-xl shadow-[0_8px_32px_0_rgba(0,88,188,0.1)]">
+                    <h1 class="font-headline-xl text-headline-xl text-primary mb-6">Experience Unobstructed Clarity for
+                        Your Home.</h1>
+                    <p class="font-body-lg text-body-lg text-secondary mb-8">Professional residential and storefront
+                        window cleaning across the GTA. We specialize in low-rise properties under 3 floors.</p>
+                    <div class="flex gap-4">
+                        <a class="bg-primary text-on-primary px-8 py-4 rounded-full font-label-md text-label-md hover:scale-105 transition-transform shadow-lg"
+                            href="#contact">Get a Free Quote</a>
+                        <a class="bg-white border-2 border-primary text-primary px-8 py-4 rounded-full font-label-md text-label-md hover:bg-primary/5 transition-colors"
+                            href="#services">View Services</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Services Section -->
+        <section class="py-24 max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop" id="services">
+            <div class="text-center mb-16">
+                <span
+                    class="bg-secondary-container text-on-secondary-container px-4 py-1 rounded-full font-label-sm text-label-sm mb-4 inline-block uppercase tracking-widest">Our
+                    Expertise</span>
+                <h2 class="font-headline-lg text-headline-lg text-on-background mt-4">Precision Cleaning for Low-Rise
+                    Buildings</h2>
+                <p class="font-body-md text-body-md text-secondary mt-2">Focused excellence on structures up to 3 floors
+                    high.</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+                <!-- Residential Card -->
+                <div
+                    class="group bg-surface-container-lowest p-8 rounded-xl border border-outline-variant hover:shadow-xl transition-all duration-300">
+                    <div
+                        class="w-16 h-16 bg-primary-container/10 rounded-full flex items-center justify-center mb-6 text-primary">
+                        <span class="material-symbols-outlined text-[32px]">home</span>
+                    </div>
+                    <h3 class="font-headline-md text-headline-md mb-4">Residential Homes</h3>
+                    <p class="font-body-md text-body-md text-secondary mb-6">Total glass rejuvenation for detached
+                        homes, townhouses, and condos. We handle screens, sills, and tracks for a complete finish.</p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center gap-2 text-secondary font-body-sm"><span
+                                class="material-symbols-outlined text-primary text-[20px]">check_circle</span> Interior
+                            &amp; Exterior</li>
+                        <li class="flex items-center gap-2 text-secondary font-body-sm"><span
+                                class="material-symbols-outlined text-primary text-[20px]">check_circle</span> Screen
+                            Detailing</li>
+                        <li class="flex items-center gap-2 text-secondary font-body-sm"><span
+                                class="material-symbols-outlined text-primary text-[20px]">check_circle</span> Track
+                            Vacuuming</li>
+                    </ul>
+                    <button
+                        class="text-primary font-label-md text-label-md flex items-center gap-2 group-hover:gap-4 transition-all">Learn
+                        More <span class="material-symbols-outlined">arrow_forward</span></button>
+                </div>
+                <!-- Storefront Card -->
+                <div
+                    class="group bg-surface-container-lowest p-8 rounded-xl border border-outline-variant hover:shadow-xl transition-all duration-300">
+                    <div
+                        class="w-16 h-16 bg-primary-container/10 rounded-full flex items-center justify-center mb-6 text-primary">
+                        <span class="material-symbols-outlined text-[32px]">store</span>
+                    </div>
+                    <h3 class="font-headline-md text-headline-md mb-4">Storefronts &amp; Retail</h3>
+                    <p class="font-body-md text-body-md text-secondary mb-6">Maintain your professional image with
+                        crystal clear retail glass. Recurring maintenance schedules available for maximum convenience.
+                    </p>
+                    <ul class="space-y-3 mb-8">
+                        <li class="flex items-center gap-2 text-secondary font-body-sm"><span
+                                class="material-symbols-outlined text-primary text-[20px]">check_circle</span> Ground
+                            Level Specialty</li>
+                        <li class="flex items-center gap-2 text-secondary font-body-sm"><span
+                                class="material-symbols-outlined text-primary text-[20px]">check_circle</span> Monthly
+                            Maintenance</li>
+                        <li class="flex items-center gap-2 text-secondary font-body-sm"><span
+                                class="material-symbols-outlined text-primary text-[20px]">check_circle</span>
+                            High-Traffic Buffing</li>
+                    </ul>
+                    <button
+                        class="text-primary font-label-md text-label-md flex items-center gap-2 group-hover:gap-4 transition-all">Learn
+                        More <span class="material-symbols-outlined">arrow_forward</span></button>
+                </div>
+            </div>
+        </section>
+        <!-- Why Us - Bento Layout -->
+        <section class="py-24 bg-surface-container-low overflow-hidden" id="why-us">
+            <div class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+                    <div class="md:col-span-4 flex flex-col justify-center">
+                        <h2 class="font-headline-lg text-headline-lg text-primary mb-6">Why GleamToronto?</h2>
+                        <p class="font-body-lg text-body-lg text-secondary mb-8">We aren't just cleaners; we are
+                            technicians of clarity dedicated to the GTA community.</p>
+                    </div>
+                    <div class="md:col-span-8 grid grid-cols-1 sm:grid-cols-2 gap-gutter">
+                        <div class="glass-card p-8 rounded-xl">
+                            <span class="material-symbols-outlined text-tertiary text-[40px] mb-4">eco</span>
+                            <h4 class="font-headline-md text-headline-md mb-2">Eco-Conscious</h4>
+                            <p class="font-body-sm text-body-sm text-secondary">Biodegradable products that are safe for
+                                your family, pets, and Toronto's environment.</p>
+                        </div>
+
+                        <div class="glass-card p-8 rounded-xl">
+                            <span class="material-symbols-outlined text-primary text-[40px] mb-4">schedule</span>
+                            <h4 class="font-headline-md text-headline-md mb-2">Punctual</h4>
+                            <p class="font-body-sm text-body-sm text-secondary">Your time is valuable. We arrive exactly
+                                on schedule or provide immediate updates.</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Gallery Section -->
+        <section class="py-24 max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop" id="gallery">
+            <div class="text-center mb-16">
+                <h2 class="font-headline-lg text-headline-lg text-on-background">The Clarity Gallery</h2>
+                <p class="font-body-md text-body-md text-secondary mt-2">See the dramatic transformation of a
+                    professional GleamToronto service.</p>
+            </div>
+            <div class="relative w-full max-w-4xl mx-auto h-[600px] rounded-2xl overflow-hidden shadow-2xl border-4 border-white group"
+                id="slider-container">
+                <img alt="Before and after comparison of a window cleaning job showing a dirty window versus a crystal clear view"
+                    class="absolute inset-0 w-full h-full object-cover"
+                    src="./befor-and-after.png">
+                <div class="absolute inset-0 pointer-events-none flex items-center justify-between px-8 z-20 group-hover:opacity-100 transition-opacity">
+                <!-- <div class="absolute inset-0 pointer-events-none flex items-center justify-between px-8 z-20 opacity-0 group-hover:opacity-100 transition-opacity"> -->
+                    <span class="bg-black/50 backdrop-blur px-4 py-2 rounded text-white font-label-md">BEFORE</span>
+                    <span class="bg-black/50 backdrop-blur px-4 py-2 rounded text-white font-label-md">AFTER</span>
+                </div>
+                <!-- <div class="absolute top-0 bottom-0 w-1 bg-white shadow-xl z-10 left-1/2" id="slider-divider">
+                    <div
+                        class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center slider-handle">
+                        <span class="material-symbols-outlined text-primary">unfold_more</span>
+                    </div>
+                </div> -->
+            </div>
+        </section>
+        <!-- Service Area -->
+        <section class="py-24 bg-primary/5" id="area">
+            <div
+                class="max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop flex flex-col md:flex-row items-center gap-16">
+                <div class="w-full md:w-1/2">
+                    <h2 class="font-headline-lg text-headline-lg text-primary mb-6">Serving the GTA</h2>
+                    <p class="font-body-lg text-body-lg text-secondary mb-8">From Etobicoke to Scarborough and North
+                        York to downtown, our fleet covers the entire Greater Toronto Area.</p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex items-center gap-2"><span class="w-2 h-2 bg-primary rounded-full"></span>
+                            Downtown Core</div>
+                        <div class="flex items-center gap-2"><span class="w-2 h-2 bg-primary rounded-full"></span>
+                            Etobicoke</div>
+                        <div class="flex items-center gap-2"><span class="w-2 h-2 bg-primary rounded-full"></span> North
+                            York</div>
+                        <div class="flex items-center gap-2"><span class="w-2 h-2 bg-primary rounded-full"></span>
+                            Scarborough</div>
+                        <div class="flex items-center gap-2"><span class="w-2 h-2 bg-primary rounded-full"></span>
+                            Richmond Hill</div>
+                        <div class="flex items-center gap-2"><span class="w-2 h-2 bg-primary rounded-full"></span>
+                            Vaughan</div>
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <div class="rounded-2xl overflow-hidden shadow-xl border border-white">
+                        <img alt="Map of Toronto service area covering main districts like North York, Etobicoke, and Scarborough"
+                            class="w-full h-auto" data-location="Toronto"
+                            src="./toronto-map.jpg">
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Testimonials -->
+        <section class="py-24 max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop" id="reviews">
+            <div class="text-center mb-16">
+                <h2 class="font-headline-lg text-headline-lg text-on-background">What Our Clients Say</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+                <div class="bg-white p-8 rounded-xl shadow-sm border border-outline-variant flex flex-col">
+                    <div class="flex text-[#FFD700] mb-4">
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    </div>
+                    <p class="font-body-md text-body-md text-secondary italic mb-6">"I never realized how much of a
+                        difference clean windows made to the light in my living room. Professional, fast, and remarkably
+                        thorough."</p>
+                    <div class="mt-auto flex items-center gap-4">
+                        <div
+                            class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-on-primary-container font-bold">
+                            SA</div>
+                        <div>
+                            <p class="font-label-md text-label-md text-on-background">Sarah Anderson</p>
+                            <p class="font-label-sm text-label-sm text-outline">Residential - Etobicoke</p>
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="bg-white p-8 rounded-xl shadow-sm border border-outline-variant flex flex-col scale-105 z-10">
+                    <div class="flex text-[#FFD700] mb-4">
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    </div>
+                    <p class="font-body-md text-body-md text-secondary italic mb-6">"Our storefront glass has never
+                        looked better. They handle our monthly cleaning like clockwork. Essential partner for my
+                        boutique."</p>
+                    <div class="mt-auto flex items-center gap-4">
+                        <div
+                            class="w-10 h-10 rounded-full bg-tertiary-container flex items-center justify-center text-on-tertiary-container font-bold">
+                            ML</div>
+                        <div>
+                            <p class="font-label-md text-label-md text-on-background">Mark Lawrence</p>
+                            <p class="font-label-sm text-label-sm text-outline">Storefront - Queen St West</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-sm border border-outline-variant flex flex-col">
+                    <div class="flex text-[#FFD700] mb-4">
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">star</span>
+                    </div>
+                    <p class="font-body-md text-body-md text-secondary italic mb-6">"Expert service for a fair price.
+                        They even cleaned the tracks and sills which other companies usually ignore. Highly recommend!"
+                    </p>
+                    <div class="mt-auto flex items-center gap-4">
+                        <div
+                            class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-bold">
+                            JT</div>
+                        <div>
+                            <p class="font-label-md text-label-md text-on-background">James Tan</p>
+                            <p class="font-label-sm text-label-sm text-outline">Residential - North York</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Contact Section -->
+        <section class="py-24 max-w-max-width mx-auto px-margin-mobile md:px-margin-desktop" id="contact">
+            <div class="bg-primary rounded-3xl p-12 flex flex-col md:flex-row gap-16 relative overflow-hidden">
+                <div
+                    class="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -translate-y-1/2 translate-x-1/2 blur-3xl">
+                </div>
+                <div class="w-full md:w-1/2 z-10">
+                    <h2 class="font-headline-lg text-headline-lg text-on-primary mb-6">Ready for Crystal Clear Views?
+                    </h2>
+                    <p class="font-body-lg text-body-lg text-primary-fixed mb-8">Fill out the form for a fast,
+                        no-obligation quote. Most quotes are sent within 24 hours.</p>
+                    <div class="space-y-6">
+                        <div class="flex items-center gap-4 text-on-primary">
+                            <span class="material-symbols-outlined bg-white/20 p-3 rounded-full">call</span>
+                            <span class="font-label-md text-label-md">(416) 555-0129</span>
+                        </div>
+                        <div class="flex items-center gap-4 text-on-primary">
+                            <span class="material-symbols-outlined bg-white/20 p-3 rounded-full">mail</span>
+                            <span class="font-label-md text-label-md">hello@gleamtoronto.com</span>
+                        </div>
+                    </div>
+                </div>
+                <form class="w-full md:w-1/2 glass-card p-8 rounded-2xl z-10 flex flex-col gap-4">
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block font-label-sm text-label-sm mb-2 text-primary">Name</label>
+                            <input
+                                class="w-full p-3 rounded-lg border-none bg-surface-container focus:ring-2 focus:ring-primary"
+                                placeholder="John Doe" type="text">
+                        </div>
+                        <div>
+                            <label class="block font-label-sm text-label-sm mb-2 text-primary">Phone</label>
+                            <input
+                                class="w-full p-3 rounded-lg border-none bg-surface-container focus:ring-2 focus:ring-primary"
+                                placeholder="(416) 000-0000" type="tel">
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block font-label-sm text-label-sm mb-2 text-primary">Service Type</label>
+                        <select
+                            class="w-full p-3 rounded-lg border-none bg-surface-container focus:ring-2 focus:ring-primary">
+                            <option>Residential Window Cleaning</option>
+                            <option>Storefront Window Cleaning</option>
+                            <option>Monthly Maintenance</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block font-label-sm text-label-sm mb-2 text-primary">Message</label>
+                        <textarea
+                            class="w-full p-3 rounded-lg border-none bg-surface-container focus:ring-2 focus:ring-primary"
+                            placeholder="Tell us about your property..." rows="4"></textarea>
+                    </div>
+                    <button
+                        class="w-full bg-primary text-on-primary font-label-md text-label-md py-4 rounded-xl hover:bg-on-primary-fixed transition-colors"
+                        type="submit">Request Quote</button>
+                </form>
+            </div>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer class="bg-surface-container border-t border-outline-variant">
+        <div
+            class="w-full py-12 px-margin-mobile md:px-margin-desktop grid grid-cols-1 md:grid-cols-2 gap-gutter max-w-max-width mx-auto">
+            <div class="flex flex-col gap-6">
+                <div class="font-headline-lg text-headline-lg font-bold text-primary">GleamToronto</div>
+                <p class="font-body-sm text-body-sm text-on-surface-variant max-w-sm">Professional clarity for your home
+                    and business. We specialize in precision window cleaning for low-rise properties across the GTA.</p>
+                <div class="flex gap-4">
+                    <a class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-primary border border-outline-variant hover:scale-110 transition-transform"
+                        href="#"><span class="material-symbols-outlined">public</span></a>
+                    <a class="w-10 h-10 rounded-full bg-white flex items-center justify-center text-primary border border-outline-variant hover:scale-110 transition-transform"
+                        href="#"><span class="material-symbols-outlined">alternate_email</span></a>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 gap-8">
+                <div>
+                    <h5 class="font-label-md text-label-md text-on-surface font-bold mb-4 uppercase">Services</h5>
+                    <ul class="space-y-2">
+                        <li class=""><a
+                                class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors"
+                                href="#">Residential</a></li>
+                        <li class=""><a
+                                class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors"
+                                href="#">Storefront</a></li>
+                        <li class=""><a
+                                class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors"
+                                href="#">Service Area</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h5 class="font-label-md text-label-md text-on-surface font-bold mb-4 uppercase">Legal</h5>
+                    <ul class="space-y-2">
+                        <li class=""><a
+                                class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors"
+                                href="#">Privacy Policy</a></li>
+                        <li class=""><a
+                                class="font-label-sm text-label-sm text-on-surface-variant hover:text-primary transition-colors"
+                                href="#">Terms</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="w-full py-6 border-t border-outline-variant text-center">
+            <p class="font-label-sm text-label-sm text-on-surface-variant">© 2024 GleamToronto Window Cleaning.
+                Professional Clarity for Your Home &amp; Business.</p>
+        </div>
+    </footer>
+    <!-- <script>
+        // Gallery Slider Logic
+        const sliderContainer = document.getElementById('slider-container');
+        const divider = document.getElementById('slider-divider');
+        let isDragging = false;
+
+        sliderContainer.addEventListener('mousedown', () => isDragging = true);
+        window.addEventListener('mouseup', () => isDragging = false);
+
+        sliderContainer.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            const rect = sliderContainer.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
+            divider.style.left = percentage + '%';
+
+            // Note: Since I'm using a single image for both before/after as requested by prompt
+            // (the prompt specifies IMAGE_8 for the gallery but doesn't provide two distinct IDs)
+            // in a real app, I'd apply a clip-path to an 'after' image overlaying a 'before' image.
+            // For this design, I'm just making the divider interactive to show the UI capability.
+        });
+
+        // Micro-interactions
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script> -->
+
+
+    <div id="snapdom-sandbox" data-snapdom-sandbox="true" aria-hidden="true"
+        style="position: absolute; left: -9999px; top: -9999px; width: 0px; height: 0px; overflow: hidden;"></div>
+</body>
+
+</html>
