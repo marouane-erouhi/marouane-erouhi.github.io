@@ -127,7 +127,7 @@
             margin-bottom: 20px;
         }
 
-        /* Project Carousel */
+        /* Project Carousel Container */
         .carousel {
             position: relative;
             width: 100%;
@@ -145,10 +145,14 @@
             transition: transform 0.4s ease-in-out;
         }
 
+        /* Fixed Carousel Slides Layout */
         .carousel-slide {
-            min-width: 100%;
+            width: 100%;
+            max-width: 100%;
+            flex-shrink: 0; /* Prevents large images from expanding the flex track */
             height: 100%;
-            object-fit: cover;
+            object-fit: cover; /* Fills container while maintaining ratio without distortion */
+            /* Note: Change to 'contain' if you prefer letterboxing over slight cropping */
         }
 
         .carousel-btn {
